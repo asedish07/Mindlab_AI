@@ -5,7 +5,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # 3. 시스템 패키지 설치 (tesseract-ocr 등)
-RUN apt-get update &&     apt-get install -y tesseract-ocr libglib2.0-0 libsm6 libxext6 libxrender-dev --no-install-recommends &&     rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y tesseract-ocr libglib2.0-0 libsm6 libxext6 libxrender-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # 4. 프로젝트 파일 복사
 COPY . .
@@ -22,4 +22,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 
 # Render가 제공하는 PORT 환경변수를 사용하도록 수정
-CMD uvicorn main:app --host 0.0.0.0 --port $PORT
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:$PORT"]
