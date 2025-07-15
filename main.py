@@ -45,6 +45,6 @@ async def ocr_endpoint(img: UploadFile = File(...)):
     print("서버 에러, 예측 불가")
     raise HTTPException(status_code=500, detail=str(e))
   
-if __name__ == "__main__":
-  import uvicorn
-  uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
+# if __name__ == "__main__":
+#   import uvicorn
+#   uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
