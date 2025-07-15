@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, File, UploadFile
 from pydantic import BaseModel
 from ocr import text_recognition
-from AI_req import summarize, generate_Q, Q_explanation
+from AI_req import summarize, generate_Q, Q_explanation, classify_subject
 import os
 import shutil
 
@@ -35,9 +35,11 @@ async def ocr_endpoint(img: UploadFile = File(...)):
 
     question = generate_Q(text_summary)
 
+    subject = classify_subject(question)
+
     explain = Q_explanation(question)
 
-    return {'summary': text_summary, 'question': question, 'explanation': explain}
+    return {'summary': text_summary, 'question': question, 'explanation': explain, 'subject': subject}
   
   except Exception as e:
     print("서버 에러, 예측 불가")
