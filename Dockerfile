@@ -18,7 +18,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 6. 포트 오픈
-EXPOSE 8080
+# EXPOSE 8080
 
 # 7. 컨테이너 시작 시 실행할 명령
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
+# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+# Render가 제공하는 PORT 환경변수를 사용하도록 수정
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "10000"]

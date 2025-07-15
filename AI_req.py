@@ -11,7 +11,7 @@ client = genai.Client()
 def summarize(text):
   summary = client.models.generate_content(
     model="gemini-2.0-flash",
-    contents=f"{text}\n\n위 글을 요약만 해줘",
+    contents=f"{text}\n\n위 글을 2문장으로 요약만 해줘",
   )
 
   return summary.text
@@ -29,7 +29,7 @@ def generate_Q(summary):
 def Q_explanation(question):
   explanation = client.models.generate_content(
     model="gemini-2.0-flash",
-    contents=f"{question}\n\n위 문제를 보고 해설만 짧게 해줘."
+    contents=f"{question}\n\n위 문제를 보고 해설만 2문장으로 해줘."
   )
 
   return explanation.text
