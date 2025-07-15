@@ -6,7 +6,7 @@ import os
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
 
-client = genai.Client(API_KEY)
+client = genai.Client(api_key=API_KEY)
 
 def summarize(text):
   summary = client.models.generate_content(
