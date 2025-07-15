@@ -25,4 +25,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 
 # Render가 제공하는 PORT 환경변수를 사용하도록 수정
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "10000"]
+CMD uvicorn main:app --host 0.0.0.0 --port $PORT
