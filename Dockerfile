@@ -5,7 +5,8 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # 3. 시스템 패키지 설치 (tesseract-ocr 등)
-RUN apt-get update && \
+RUN mkdir -p /var/lib/apt/lists/partial && \
+    apt-get update && \
     apt-get install -y tesseract-ocr libglib2.0-0 libsm6 libxext6 libxrender-dev && \
     rm -rf /var/lib/apt/lists/*
 
