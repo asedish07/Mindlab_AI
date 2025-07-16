@@ -10,7 +10,7 @@ client = genai.Client(api_key=API_KEY)
 
 def summarize(text):
   summary = client.models.generate_content(
-    model="gemini-2.0-flash",
+    model="gemini-2.0-flash-lite",
     contents=f"{text}\n\n위 글을 2문장으로 요약만 해줘",
   )
 
@@ -38,7 +38,7 @@ def classify_subject(question):
   subject = ['국어', '영어', '수학', '사회', '과학']
 
   subject_answer = client.models.generate_content(
-    model="gemini-2.0-flash",
+    model="gemini-2.0-flash-lite",
     contents=f"{question}\n\n위 문제를 보고 해당 문제가 국어, 영어, 수학, 사회, 과학 중 어떤 과목에 해당되는지 한 단어로 알려줘."
   )
 
