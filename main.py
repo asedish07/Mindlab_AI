@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, File, UploadFile
 from pydantic import BaseModel
+from pathlib import Path
 from ocr import text_recognition
 from AI_req import summarize, generate_Q, Q_explanation, classify_subject
 import os
@@ -38,6 +39,15 @@ async def ocr_endpoint(img: UploadFile = File(...)):
     subject = classify_subject(question)
 
     explain = Q_explanation(question)
+
+    save_dir = Path(save_path)
+
+    try:
+      shutil.rmtree(save_dir)
+      save_dir.mkdir(parents=True, exist_ok=True)
+      print("서버 내 이미지 삭제 성공")
+    except Exception as e:
+      print(f"폴더 삭제 중 에러 발생 / Error: {e}")
 
     return {'summary': text_summary, 'question': question, 'explanation': explain, 'subject': subject}
   
